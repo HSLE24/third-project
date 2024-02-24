@@ -10,9 +10,28 @@
 </head>
 <body>
     <div class="container text-center">
+        <div class="side-menu" id="mySidenav">
+            <button class="closebtn" onclick="closeNav()">&times;</button>
+            <div class="side-menu-list" id="menu-list">
+                <a class="menu-link" href="#">Sport</a>
+                <a class="menu-link" href="#">Tech</a>
+                <a class="menu-link" href="#">World</a>
+                <a class="menu-link" href="#">Finance</a>
+                <a class="menu-link" href="#">Politics</a>
+                <a class="menu-link" href="#">Economics</a>
+                <a class="menu-link" href="#">Entertainment</a>
+                <a class="menu-link" href="#">Beauty</a>
+                <a class="menu-link" href="#">Travel</a>
+                <a class="menu-link" href="#">Music</a>
+                <a class="menu-link" href="#">Food</a>
+                <a class="menu-link" href="#">Science</a>
+                <a class="menu-link" href="#">Gaming</a>
+                <a class="menu-link" href="#">Energy</a>
+            </div>
+        </div>
         <nav class="navbar-expand-lg navbar-light">
             <div class="navbar" style="display:flex; justify-content:flex-start;">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button onclick="openNav()" class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <i id="search-icon" class="fa-solid fa-magnifying-glass m-3 pe-2"></i>
@@ -26,20 +45,20 @@
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar nav-pills navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#">Sport</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Tech</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">World</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Finance</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Politics</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Economics</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Entertainment</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Beauty</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Travel</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Music</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Food</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Science</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Gaming</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Energy</a></li>
+                    <li class="nav-item"><a class="nav-link" id="Sport" href="#">Sport</a></li>
+                    <li class="nav-item"><a class="nav-link" id="Tech" href="#">Tech</a></li>
+                    <li class="nav-item"><a class="nav-link" id="World" href="#">World</a></li>
+                    <li class="nav-item"><a class="nav-link" id="Finance" href="#">Finance</a></li>
+                    <li class="nav-item"><a class="nav-link" id="Politics" href="#">Politics</a></li>
+                    <li class="nav-item"><a class="nav-link" id="Economics" href="#">Economics</a></li>
+                    <li class="nav-item"><a class="nav-link" id="Entertainment" href="#">Entertainment</a></li>
+                    <li class="nav-item"><a class="nav-link" id="Beauty" href="#">Beauty</a></li>
+                    <li class="nav-item"><a class="nav-link" id="Travel" href="#">Travel</a></li>
+                    <li class="nav-item"><a class="nav-link" id="Music" href="#">Music</a></li>
+                    <li class="nav-item"><a class="nav-link" id="Food" href="#">Food</a></li>
+                    <li class="nav-item"><a class="nav-link" id="Science" href="#">Science</a></li>
+                    <li class="nav-item"><a class="nav-link" id="Gaming" href="#">Gaming</a></li>
+                    <li class="nav-item"><a class="nav-link" id="Energy" href="#">Energy</a></li>
                 </ul>
             </div>
         </nav>

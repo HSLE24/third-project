@@ -4,16 +4,62 @@
 .head-line svg{
     width: 430px;
 }
+
 .nav-button{
     border: 0;
     outline: 0;
     background-color: white;
 }
+
 #search-input{
     display: none;
 }
 #search-button{
     display: none;
+}
+
+.side-menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+.side-menu-list button {
+    margin: 5px;
+    border: none;
+    background: none;
+    width: 120px;
+}
+.side-menu .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    border: none;
+    background: none;
+}
+.side-menu-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.menu-link
+{
+    padding-top: 0.5em;
+    text-decoration: none;
+    color: black;
+}
+.menu-link:hover
+{
+    cursor : pointer;
+    text-decoration: underline;
 }
 
 .title{

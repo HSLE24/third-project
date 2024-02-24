@@ -1,4 +1,4 @@
-const API_KEY = '219e7f9edbec40a8a1b6d759204398de'
+const API_KEY = ""
 
 let url = "";
 let news = [];
@@ -12,10 +12,19 @@ let searchIcon = document.getElementById("search-icon")
 let searchInput = document.getElementById("search-input")
 let searchButton = document.getElementById("search-button")
 let categoryList = document.querySelectorAll(".nav-pills a")
+let sidebarList = document.querySelectorAll("#menu-list a")
 
 searchIcon.addEventListener("click", visibleSearch)
 searchButton.addEventListener("click", searchArticle)
 document.addEventListener("keypress", handleEnterKeyPress)
+
+const openNav = () => {
+    document.getElementById("mySidenav").style.width = "250px";
+};
+  
+const closeNav = () => {
+    document.getElementById("mySidenav").style.width = "0";
+};
 
 categoryList.forEach(item => {
     item.addEventListener("click", function(){
@@ -25,6 +34,24 @@ categoryList.forEach(item => {
 
         item.classList.add("active")
         changeCategory(item.textContent);
+    })
+});
+
+sidebarList.forEach(item => {
+    item.addEventListener("click", function(){
+        
+        changeCategory(item.textContent);
+
+        categoryList.forEach(link => {
+            if (link.textContent == item.textContent){
+                link.classList.add("active")
+            }
+            else {
+                link.classList.remove("active")
+            }
+        })
+
+        closeNav();
     })
 });
 
