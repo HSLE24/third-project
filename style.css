@@ -1,3 +1,7 @@
+.logo-img{
+    cursor: pointer;
+}
+
 .head-line{
     margin: 2em;
 }
@@ -10,14 +14,12 @@
     outline: 0;
     background-color: white;
 }
-
 #search-input{
     display: none;
 }
 #search-button{
     display: none;
 }
-
 .side-menu {
     height: 100%;
     width: 0;
@@ -29,12 +31,8 @@
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
-}
-.side-menu-list button {
-    margin: 5px;
-    border: none;
-    background: none;
-    width: 120px;
+    overflow-y: auto; /* 세로 스크롤바 추가 */
+    max-height: 100vh; /* 화면 높이보다 크면 스크롤바 표시 */
 }
 .side-menu .closebtn {
     position: absolute;
@@ -55,11 +53,37 @@
     padding-top: 0.5em;
     text-decoration: none;
     color: black;
+    transition: transform 0.3s ease;
 }
 .menu-link:hover
 {
     cursor : pointer;
     text-decoration: underline;
+    transform: scale(1.3);
+}
+.menu-item{
+    padding-left: 1em;
+}
+.menu-link i
+{
+    transition: transform 0.3s ease;
+}
+.menu-link i:hover
+{
+    cursor : pointer;
+    transform: scale(1.3);
+}
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/ 
+@media screen and (max-width:480px) {
+    .menu-item{
+        display: none;
+    }
+    .head-line svg{
+        width: 350px;
+    }
+}
+.blue{
+    color: blue;
 }
 
 .title{

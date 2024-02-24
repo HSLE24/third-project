@@ -1,4 +1,4 @@
-const API_KEY = ""
+const API_KEY = "b1fe516cb2ff4032b010ec5773f3a973";
 
 let url = "";
 let news = [];
@@ -18,13 +18,28 @@ searchIcon.addEventListener("click", visibleSearch)
 searchButton.addEventListener("click", searchArticle)
 document.addEventListener("keypress", handleEnterKeyPress)
 
+navWidth = "250px";
+
 const openNav = () => {
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenav").style.width = navWidth;
 };
   
 const closeNav = () => {
     document.getElementById("mySidenav").style.width = "0";
 };
+
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 1000) {
+        closeNav();
+        navWidth = "250px";
+    }
+    else if (window.innerWidth <= 480){
+        navWidth = "100px";
+    }
+    else{
+        navWidth = "250px";
+    }
+ });
 
 categoryList.forEach(item => {
     item.addEventListener("click", function(){
@@ -33,13 +48,28 @@ categoryList.forEach(item => {
         })
 
         item.classList.add("active")
+
         changeCategory(item.textContent);
+
+        sidebarList.forEach(link => {
+            if (link.textContent == item.textContent){
+                link.classList.add("blue")
+            }
+            else {
+                link.classList.remove("blue")
+            }
+        })
     })
 });
 
 sidebarList.forEach(item => {
     item.addEventListener("click", function(){
-        
+
+        sidebarList.forEach(link => {
+            link.classList.remove("blue")
+        })
+        item.classList.add("blue")
+
         changeCategory(item.textContent);
 
         categoryList.forEach(link => {
@@ -73,30 +103,23 @@ async function getArticle(){
         totalResults = data.totalResults
 
         console.log(news);
-        console.log(totalResults);
-        
+
+        if (response.status === 200){
+            render();
+            paginationRender();
+        }
+        else {
+            throw new Error(data.message)
+        }
         if (news.length < 1){
             throw new Error("No matches for your search")
         }
-        if (response.status != 200){
-            const responseError = {
-                400: "Bad Request",
-                401: "Unauthorized",
-                404: "Not Found",
-                429: "Too Many Requests",
-                500: "Server Error"
-            }
-
-            throw new Error(responseError[response.status])
-        }
-        render();
-        paginationRender();
     }
     catch(error){
 
         let resultHTML = `
         <div class="alert alert-danger" role="alert">
-            ${error}
+            ${error.message}
         </div>
         `;
         document.getElementById("article-group").innerHTML = resultHTML;
@@ -135,7 +158,7 @@ function render(){
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-4">
-                <img src="${urlToImage}" class="img-fluid rounded-start">
+                <img src="${urlToImage}" onerror="this.onerror=null; this.src='NotImage.JPG';" class="img-fluid rounded-start">
                 </div>
                 <div class="col-md-8">
                 <div class="card-body">
@@ -164,7 +187,7 @@ function handleEnterKeyPress(event){
 function getLatestArticle(){
     page = 1;
 
-    url = new URL(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`);
+    url = new URL(`https://noona-times-v2.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}`);
     getArticle(url);
 }
 
@@ -172,19 +195,27 @@ function searchArticle(){
     page = 1;
 
     if (searchInput.value != null && searchInput.value != undefined  && searchInput.value != ""){
-        url = new URL(`https://newsapi.org/v2/top-headlines?q=${searchInput.value}&apiKey=${API_KEY}`);
-        getArticle(url);
-    }
 
+        url = new URL(`https://noona-times-v2.netlify.app/top-headlines?q=${searchInput.value}&apiKey=${API_KEY}`);
+        getArticle(url);
+        
+        categoryList.forEach(link => {
+            link.classList.remove("active")
+        })
+        sidebarList.forEach(link => {
+            link.classList.remove("blue")
+        })
+
+        closeNav();
+    }
 }
 
 function changeCategory(category){
     page = 1;
     
     category = category.toLowerCase();
-    url = new URL(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`);
+    url = new URL(`https://noona-times-v2.netlify.app/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`);
     getArticle(url);
-
 }
 
 const paginationRender = () => {
@@ -203,7 +234,7 @@ const paginationRender = () => {
         paginationHTML = `<li class="page-item nonvisible"><a class="page-link" tabindex="-1" aria-disabled="true"><<</a></li>`
         paginationHTML += `<li class="page-item nonvisible"><a class="page-link" tabindex="-1" aria-disabled="true">Previous</a></li>`
     
-    } else {
+    } else{
         paginationHTML = `<li class="page-item" onclick="moveToPage(${1})"><a class="page-link" tabindex="-1" aria-disabled="true"><<</a></li>`
         paginationHTML += `<li class="page-item" onclick="moveToPage(${page-1})"><a class="page-link" tabindex="-1" aria-disabled="true">Previous</a></li>`
     }
@@ -216,7 +247,7 @@ const paginationRender = () => {
         paginationHTML += `<li class="page-item nonvisible"><a class="page-link" tabindex="-1" aria-disabled="true">Next</a></li>`
         paginationHTML += `<li class="page-item nonvisible"><a class="page-link" tabindex="-1" aria-disabled="true">>></a></li>`
 
-    } else {
+    } else  if (news.length >= 1){
         paginationHTML += `<li class="page-item" onclick="moveToPage(${page+1})"><a class="page-link" tabindex="-1" aria-disabled="true">Next</a></li>`
         paginationHTML += `<li class="page-item" onclick="moveToPage(${totalPages})"><a class="page-link" tabindex="-1" aria-disabled="true">>></a></li>`
     }
